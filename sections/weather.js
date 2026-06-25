@@ -1,15 +1,14 @@
 /* ============================================================
-   WEATHER.JS — Live weather particles matching Thengana's sky
-   Fetches Open-Meteo (free, no key needed) for Thengana weather
+   WEATHER.JS — Live weather particles matching Kerala's sky
+   Fetches Open-Meteo (free, no key needed) for Kerala weather
    Shows rain / thunderstorm / clear petals accordingly
 ============================================================ */
 
 (function () {
 
- 
-  // Thengana coordinates
-  const LAT = 9.4265;
-  const LON = 76.5321;
+  // Kerala coordinates
+  const LAT = 10.8505;
+  const LON = 76.2711;
 
   let canvas, ctx;
   let particles = [];
@@ -19,11 +18,11 @@
 
   // WMO weather code → our type
   function decodeWeather(code) {
-    if (code >= 95) return { type: 'thunder', label: '⛈ Storm in Thengana' };
-    if (code >= 61) return { type: 'rain', label: '🌧 Raining in Thengana' };
-    if (code >= 51) return { type: 'drizzle', label: '🌦 Drizzling in Thengana' };
-    if (code >= 71) return { type: 'snow', label: '❄ Snow in Thengana' };   // unlikely but handled
-    return { type: 'petals', label: '🌸 Clear skies in Thengana' };
+    if (code >= 95) return { type: 'thunder', label: '⛈ Storm in Kerala' };
+    if (code >= 61) return { type: 'rain',    label: '🌧 Raining in Kerala' };
+    if (code >= 51) return { type: 'drizzle', label: '🌦 Drizzling in Kerala' };
+    if (code >= 71) return { type: 'snow',    label: '❄ Snow in Kerala' };   // unlikely but handled
+    return              { type: 'petals',  label: '🌸 Clear skies in Kerala' };
   }
 
   async function fetchWeather() {
@@ -34,7 +33,7 @@
       const code = data?.current?.weathercode ?? 0;
       return decodeWeather(code);
     } catch (e) {
-      return { type: 'petals', label: '🌸 Thengana skies' };
+      return { type: 'petals', label: '🌸 Kerala skies' };
     }
   }
 
@@ -78,11 +77,11 @@
 
   function spawnParticle() {
     switch (weatherType) {
-      case 'rain': return makeRainDrop(false);
+      case 'rain':    return makeRainDrop(false);
       case 'drizzle': return makeRainDrop(false);
       case 'thunder': return makeRainDrop(true);
-      case 'snow': return makeSnow();
-      default: return makePetal();
+      case 'snow':    return makeSnow();
+      default:        return makePetal();
     }
   }
 
