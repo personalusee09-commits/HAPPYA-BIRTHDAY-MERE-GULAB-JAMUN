@@ -1,0 +1,258 @@
+/* ============================================================
+   CHAND.CSS — Type "chand" anywhere → romantic night sky
+   Moon rises · Stars appear · Soft message · Video plays
+============================================================ */
+
+/* ── Base overlay ───────────────────────────────────────── */
+#chandOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: none;
+  opacity: 0;
+  background: #000;
+  transition: opacity 1.2s ease;
+}
+
+#chandOverlay.ch-visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── Star canvas (full overlay) ─────────────────────────── */
+#chandStarCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── Night sky gradient ──────────────────────────────────── */
+.ch-sky {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    #0d1b2a 0%,
+    #060d14 50%,
+    #000000 100%
+  );
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+#chandOverlay.ch-sky-in .ch-sky {
+  opacity: 1;
+}
+
+/* ── Moon ───────────────────────────────────────────────── */
+.ch-moon {
+  position: absolute;
+  left: 50%;
+  z-index: 3;
+  transform: translateX(-50%) translateY(40px);
+  opacity: 0;
+  transition: opacity 2.4s ease, transform 3s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.ch-moon.ch-moon-in {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.ch-moon-svg {
+  width: clamp(80px, 12vw, 130px);
+  height: clamp(80px, 12vw, 130px);
+  filter: drop-shadow(0 0 28px rgba(255, 245, 210, 0.45))
+          drop-shadow(0 0 60px rgba(255, 235, 180, 0.2));
+}
+
+/* Moon glow ring */
+.ch-moon::after {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,245,210,0.12) 0%, transparent 70%);
+  animation: ch-moon-pulse 4s ease-in-out infinite;
+}
+
+@keyframes ch-moon-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.06); }
+}
+
+/* ── Romantic message ───────────────────────────────────── */
+.ch-message {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  text-align: center;
+  width: 90%;
+  max-width: 560px;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+  pointer-events: none;
+}
+
+.ch-message.ch-message-in {
+  opacity: 1;
+}
+
+.ch-message-urdu {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(255, 245, 210, 0.55);
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.ch-message-main {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.15rem, 3.5vw, 1.9rem);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255, 245, 210, 0.9);
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+}
+
+/* ── Video wrapper ───────────────────────────────────────── */
+.ch-video-wrap {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  width: min(88vw, 820px);
+  opacity: 0;
+  transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateX(-50%) translateY(16px);
+}
+
+.ch-video-wrap.ch-video-in {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+#chandVideo {
+  width: 100%;
+  max-height: 72vh;
+  display: block;
+  border-radius: 16px;
+  background: #000;
+  box-shadow:
+    0 0 0 1px rgba(255,245,210,0.08),
+    0 24px 80px rgba(0,0,0,0.9),
+    0 0 60px rgba(255,235,180,0.06);
+}
+
+/* Soft moon-glow border around video */
+.ch-video-glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: 17px;
+  background: transparent;
+  box-shadow: 0 0 40px rgba(255,235,180,0.1), 0 0 80px rgba(255,235,180,0.05);
+  pointer-events: none;
+}
+
+/* ── Tap to play (mobile) ───────────────────────────────── */
+.ch-play-btn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  border-radius: 16px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.ch-play-btn.ch-play-visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.ch-play-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 245, 210, 0.18);
+  border: 1.5px solid rgba(255, 245, 210, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: rgba(255,245,210,0.9);
+  padding-left: 3px;
+  backdrop-filter: blur(4px);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.ch-play-btn:hover .ch-play-icon {
+  transform: scale(1.1);
+  background: rgba(255, 245, 210, 0.26);
+}
+
+/* ── Exit button ─────────────────────────────────────────── */
+.ch-exit {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  z-index: 10;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 245, 210, 0.25);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  opacity: 0;
+  transition: opacity 0.8s ease, color 0.3s ease;
+  pointer-events: none;
+}
+
+.ch-exit.ch-exit-in {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.ch-exit:hover {
+  color: rgba(255, 245, 210, 0.7);
+}
+
+/* ── Fade out everything ─────────────────────────────────── */
+#chandOverlay.ch-fade-out {
+  opacity: 0 !important;
+  transition: opacity 1.4s ease !important;
+  pointer-events: none !important;
+}
+
+/* ── Mobile ─────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  #chandVideo {
+    border-radius: 10px;
+    max-height: 60vh;
+  }
+
+  .ch-video-wrap {
+    width: 96vw;
+  }
+
+  .ch-video-glow { border-radius: 11px; }
+  .ch-play-btn   { border-radius: 10px; }
+}

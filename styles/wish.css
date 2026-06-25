@@ -1,0 +1,114 @@
+/* ============================================================
+   WISH.CSS — Final screen, confetti, closing message
+============================================================ */
+
+#wish {
+  background: var(--soft-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--gutter);
+  position: relative;
+  overflow: hidden;
+}
+
+#confettiCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.wish-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wish-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+  opacity: 0; /* GSAP */
+}
+
+.wish-name {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 12vw, 10rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1;
+  opacity: 0; /* GSAP */
+}
+
+.wish-message {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.6vw, 1.6rem);
+  font-weight: 300;
+  color: var(--grey-light);
+  margin-top: 32px;
+  max-width: 560px;
+  line-height: 1.6;
+  opacity: 0; /* GSAP */
+}
+
+.wish-sign {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-style: italic;
+  color: var(--accent);
+  margin-top: 40px;
+  opacity: 0; /* GSAP */
+}
+
+/* Future dreams list */
+.wish-future {
+  margin-top: clamp(40px, 7vw, 70px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0; /* GSAP */
+}
+
+.wish-future-item {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--grey-mid);
+  letter-spacing: 0.02em;
+}
+
+.wish-future-item::before {
+  content: '— ';
+  color: var(--accent);
+}
+
+/* Final small note */
+.wish-end {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--grey-dark);
+  margin-top: clamp(60px, 10vw, 100px);
+  opacity: 0; /* GSAP */
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 768px) {
+  .wish-future {
+    align-items: center;
+  }
+}

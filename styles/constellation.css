@@ -1,0 +1,97 @@
+/* ============================================================
+   CONSTELLATION.CSS — Interactive star-connecting section
+============================================================ */
+
+#constellation {
+  background: linear-gradient(180deg, #0A0A14 0%, #0E0E1A 50%, #0A0A14 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--section-pad) var(--gutter);
+  position: relative;
+  overflow: hidden;
+}
+
+.constellation-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+#constellation .section-label,
+#constellation .section-title {
+  opacity: 0; /* GSAP */
+  transform: translateY(24px);
+}
+
+#constellation .section-label {
+  color: var(--accent);
+}
+
+#constellation .section-title {
+  color: var(--white);
+}
+
+#constellation .section-title em {
+  color: var(--accent);
+}
+
+/* Canvas */
+#constellationCanvas {
+  width: min(92vw, 560px);
+  height: min(80vw, 440px);
+  margin: clamp(32px, 6vw, 56px) auto 0;
+  display: block;
+  opacity: 0; /* GSAP */
+  cursor: crosshair;   /* crosshair feels more precise than default pointer */
+  touch-action: none;
+}
+
+/* Slightly bigger canvas on mobile so stars have breathing room */
+@media (max-width: 480px) {
+  #constellationCanvas {
+    width: 96vw;
+    height: 90vw;
+  }
+}
+
+/* Hint text */
+.constellation-hint {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 245, 220, 0.5);
+  margin-top: clamp(20px, 4vw, 32px);
+  opacity: 0; /* GSAP */
+  transition: opacity 0.8s ease;
+}
+
+/* Completion message */
+.constellation-message {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2.6vw, 1.5rem);
+  line-height: 1.7;
+  color: var(--grey-light);
+  max-width: 560px;
+  margin-top: clamp(28px, 5vw, 44px);
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.constellation-message .constellation-word {
+  display: inline-block;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+/* ============================================================
+   RESPONSIVE — handled inline above
+============================================================ */

@@ -1,0 +1,114 @@
+/* ============================================================
+   SKY.CSS — "Same Sky" section: moon phase + night message
+============================================================ */
+
+#sky {
+  background: linear-gradient(180deg, #0A0A14 0%, #14141F 60%, #0A0A14 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--section-pad) var(--gutter);
+  position: relative;
+  overflow: hidden;
+}
+
+#skyCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sky-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#sky .section-label,
+#sky .section-title {
+  opacity: 0; /* GSAP */
+  transform: translateY(24px);
+}
+
+#sky .section-label {
+  color: var(--accent);
+}
+
+#sky .section-title {
+  color: var(--white);
+}
+
+#sky .section-title em {
+  color: var(--accent);
+}
+
+/* Moon */
+.moon-wrap {
+  margin: clamp(40px, 7vw, 70px) 0 clamp(24px, 4vw, 40px);
+  width: min(48vw, 200px);
+  opacity: 0; /* GSAP */
+  transform: scale(0.85);
+}
+
+.moon-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 0 40px rgba(255, 245, 220, 0.18));
+}
+
+.moon-base {
+  fill: #F4ECD8;
+}
+
+.moon-shadow {
+  fill: #0A0A0A;
+  transition: x 1.2s ease, width 1.2s ease;
+}
+
+.moon-outline {
+  fill: none;
+  stroke: rgba(255, 245, 220, 0.15);
+  stroke-width: 1.5;
+}
+
+/* Moon phase name */
+.moon-phase-name {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 245, 220, 0.55);
+  margin-bottom: clamp(24px, 4vw, 40px);
+  opacity: 0; /* GSAP */
+  transform: translateY(16px);
+}
+
+/* Message */
+.sky-message {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.15rem, 2.6vw, 1.6rem);
+  line-height: 1.7;
+  color: var(--grey-light);
+  max-width: 600px;
+  opacity: 0; /* GSAP */
+  transform: translateY(20px);
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 768px) {
+  .moon-wrap {
+    width: min(55vw, 160px);
+  }
+}

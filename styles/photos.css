@@ -1,0 +1,165 @@
+/* ============================================================
+   PHOTOS.CSS — Swipeable polaroid cards
+============================================================ */
+
+#photos {
+  background: var(--off-white);
+  padding: var(--section-pad) 0;
+  overflow: hidden;
+}
+
+.photos-header {
+  text-align: center;
+  padding: 0 var(--gutter);
+  margin-bottom: 56px;
+  opacity: 0; /* GSAP */
+}
+
+/* Swiper container */
+.photoSwiper {
+  width: 100%;
+  padding: 20px 0 60px !important;
+  overflow: visible !important;
+}
+
+/* Each slide */
+.photoSwiper .swiper-slide {
+  width: 320px !important;
+  display: flex;
+  justify-content: center;
+  transition: transform 0.4s ease;
+}
+
+/* The polaroid card */
+.photo-card {
+  background: var(--white);
+  padding: 20px 20px 28px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+  transform: rotate(-1.5deg);
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 0.4s ease;
+  cursor: grab;
+  user-select: none;
+}
+
+.photo-card:active {
+  cursor: grabbing;
+}
+
+/* Active card - straightens and lifts */
+.photoSwiper .swiper-slide-active .photo-card {
+  transform: rotate(0deg) translateY(-8px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.14), 0 4px 16px rgba(0,0,0,0.06);
+}
+
+/* Alternate tilt directions */
+.photoSwiper .swiper-slide:nth-child(even) .photo-card {
+  transform: rotate(1.5deg);
+}
+
+.photoSwiper .swiper-slide:nth-child(even).swiper-slide-active .photo-card {
+  transform: rotate(0deg) translateY(-8px);
+}
+
+/* Photo frame inside polaroid */
+.photo-frame {
+  width: 280px;
+  height: 320px;
+  overflow: hidden;
+  background: var(--grey-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Placeholder when no photo */
+.photo-placeholder {
+  font-size: 3rem;
+  opacity: 0.3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: var(--grey-light);
+}
+
+/* Caption below photo — handwritten feel */
+.photo-caption {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--grey-dark);
+  text-align: center;
+  margin-top: 16px;
+  line-height: 1.5;
+  padding: 0 4px;
+}
+
+/* Swipe hint */
+.swipe-hint {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--grey-mid);
+  margin-top: 8px;
+  opacity: 0; /* GSAP */
+}
+
+/* Navigation arrows — minimal */
+.photo-prev,
+.photo-next {
+  color: var(--soft-black) !important;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+.photo-prev:hover,
+.photo-next:hover {
+  opacity: 0.8;
+}
+
+.photo-prev::after,
+.photo-next::after {
+  font-size: 1rem !important;
+  font-weight: 700;
+}
+
+/* Pagination dots */
+.photo-pagination .swiper-pagination-bullet {
+  background: var(--grey-mid);
+  opacity: 0.3;
+  width: 6px;
+  height: 6px;
+}
+
+.photo-pagination .swiper-pagination-bullet-active {
+  background: var(--accent);
+  opacity: 1;
+  width: 20px;
+  border-radius: 3px;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 768px) {
+  .photoSwiper .swiper-slide {
+    width: 260px !important;
+  }
+
+  .photo-frame {
+    width: 220px;
+    height: 260px;
+  }
+}

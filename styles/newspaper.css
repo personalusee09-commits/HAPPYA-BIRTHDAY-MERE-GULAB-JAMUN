@@ -1,0 +1,464 @@
+/* ============================================================
+   NEWSPAPER.CSS — Broadsheet style, unroll animation
+============================================================ */
+
+/* ── Floating button after radio ────────────────────────── */
+#newsBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto;
+  padding: 14px 28px;
+  background: #F5F0E8;
+  border: 1px solid rgba(42, 31, 20, 0.15);
+  border-radius: 100px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #2A1F14;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  transition: all 0.3s ease;
+
+  /* Centered block between sections */
+  display: flex;
+  margin: -20px auto 0;
+  transform: translateY(20px);
+  opacity: 0;
+  z-index: 10;
+}
+
+#newsBtn.news-btn-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.3s ease, box-shadow 0.3s ease;
+}
+
+#newsBtn:hover {
+  background: #2A1F14;
+  color: #F5F0E8;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+}
+
+.news-btn-icon {
+  font-size: 1.1rem;
+}
+
+.news-btn-label {
+  letter-spacing: 0.2em;
+}
+
+/* Subtle pulse to draw attention */
+@keyframes news-btn-pulse {
+  0%, 100% { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+  50% { box-shadow: 0 4px 32px rgba(200, 168, 130, 0.35); }
+}
+
+#newsBtn.news-btn-visible {
+  animation: news-btn-pulse 3s ease-in-out infinite 1.5s;
+}
+
+#newsBtn:hover {
+  animation: none;
+}
+
+/* ── Overlay backdrop ────────────────────────────────────── */
+#newspaperOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99997;
+  background: rgba(10, 8, 5, 0);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(16px, 4vw, 40px);
+  overflow-y: auto;
+  transition: background 0.5s ease;
+  cursor: pointer;
+}
+
+#newspaperOverlay.np-visible {
+  background: rgba(10, 8, 5, 0.88);
+}
+
+#newspaperOverlay.np-closing {
+  background: rgba(10, 8, 5, 0) !important;
+  transition: background 0.6s ease !important;
+}
+
+#newspaperOverlay.np-closing .np-paper {
+  opacity: 0;
+  transform: scaleY(0.95) translateY(-20px);
+  transition: opacity 0.5s ease, transform 0.5s ease !important;
+}
+
+/* ── Paper ───────────────────────────────────────────────── */
+.np-paper {
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  background: #F9F4E8;
+  cursor: default;
+  padding: clamp(24px, 5vw, 56px) clamp(20px, 5vw, 52px);
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.08),
+    0 20px 60px rgba(0,0,0,0.3),
+    0 60px 120px rgba(0,0,0,0.2);
+
+  /* Paper texture */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+
+  /* Unroll animation */
+  opacity: 0;
+  transform: scaleY(0.4) translateY(-40px);
+  transform-origin: top center;
+  transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.np-paper.np-paper-in {
+  opacity: 1;
+  transform: scaleY(1) translateY(0);
+}
+
+/* ── Close button ────────────────────────────────────────── */
+.np-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  color: rgba(42, 31, 20, 0.4);
+  cursor: pointer;
+  padding: 6px 10px;
+  font-family: 'Inter', sans-serif;
+  transition: color 0.3s ease;
+}
+
+.np-close:hover {
+  color: #2A1F14;
+}
+
+/* ── Masthead ────────────────────────────────────────────── */
+.np-masthead {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.np-masthead-top {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(42, 31, 20, 0.45);
+  margin-bottom: 10px;
+}
+
+.np-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2.2rem, 7vw, 4.2rem);
+  font-weight: 700;
+  color: #1A1008;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  border-top: 3px solid #1A1008;
+  border-bottom: 1px solid #1A1008;
+  padding: 10px 0;
+  margin: 0;
+}
+
+.np-masthead-bottom {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: rgba(42, 31, 20, 0.45);
+  margin-top: 8px;
+}
+
+/* ── Rules ───────────────────────────────────────────────── */
+.np-rule {
+  border: none;
+  border-top: 2px solid #1A1008;
+  margin: 12px 0;
+}
+
+.np-rule-thin {
+  border-top-width: 1px;
+  border-color: rgba(42, 31, 20, 0.2);
+}
+
+/* ── Headline block ──────────────────────────────────────── */
+.np-headline-block {
+  text-align: center;
+  padding: 16px 0;
+}
+
+.np-kicker {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #8B1A1A;
+  margin-bottom: 10px;
+}
+
+.np-headline {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.5rem, 4vw, 2.6rem);
+  font-weight: 700;
+  color: #1A1008;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0 0 12px;
+}
+
+.np-deck {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(42, 31, 20, 0.7);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* ── Body columns ────────────────────────────────────────── */
+.np-body {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: clamp(16px, 3vw, 36px);
+  margin-top: 16px;
+}
+
+/* ── Article column ──────────────────────────────────────── */
+.np-byline {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(42, 31, 20, 0.45);
+  border-top: 1px solid rgba(42, 31, 20, 0.15);
+  border-bottom: 1px solid rgba(42, 31, 20, 0.15);
+  padding: 6px 0;
+  margin-bottom: 16px;
+}
+
+.np-drop {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(0.95rem, 1.8vw, 1.08rem);
+  line-height: 1.75;
+  color: #2A1F14;
+  margin-bottom: 14px;
+}
+
+/* Drop cap */
+.np-dropcap {
+  float: left;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 4.2em;
+  font-weight: 700;
+  line-height: 0.72;
+  margin-right: 6px;
+  margin-top: 6px;
+  color: #1A1008;
+}
+
+.np-para {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(0.92rem, 1.7vw, 1.05rem);
+  line-height: 1.75;
+  color: #2A1F14;
+  margin-bottom: 12px;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.np-subhead {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #1A1008;
+  border-top: 1px solid rgba(42, 31, 20, 0.15);
+  padding-top: 10px;
+  margin: 18px 0 10px;
+}
+
+.np-continued {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: rgba(42, 31, 20, 0.4);
+  text-align: right;
+  margin-top: 16px;
+  border-top: 1px solid rgba(42, 31, 20, 0.1);
+  padding-top: 8px;
+}
+
+/* ── Side column ─────────────────────────────────────────── */
+.np-col-side {
+  border-left: 1px solid rgba(42, 31, 20, 0.15);
+  padding-left: clamp(16px, 2.5vw, 28px);
+}
+
+/* Photo */
+.np-photo-block {
+  margin: 0 0 20px;
+}
+
+.np-photo-frame {
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: #E8E0D0;
+}
+
+.np-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(20%) sepia(10%);
+}
+
+.np-caption {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem;
+  line-height: 1.6;
+  color: rgba(42, 31, 20, 0.55);
+  margin-top: 8px;
+  border-top: 1px solid rgba(42, 31, 20, 0.15);
+  padding-top: 6px;
+}
+
+.np-caption-credit {
+  display: block;
+  margin-top: 4px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.52rem;
+}
+
+/* Sidebar facts box */
+.np-sidebar-box {
+  background: rgba(42, 31, 20, 0.04);
+  border: 1px solid rgba(42, 31, 20, 0.12);
+  padding: 14px 16px;
+  margin-bottom: 20px;
+}
+
+.np-sidebar-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8B1A1A;
+  margin-bottom: 10px;
+}
+
+.np-sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.np-sidebar-list li {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  color: rgba(42, 31, 20, 0.7);
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(42, 31, 20, 0.08);
+  line-height: 1.4;
+}
+
+.np-sidebar-list li:last-child {
+  border-bottom: none;
+}
+
+.np-sidebar-list strong {
+  color: #1A1008;
+}
+
+/* Pull quote */
+.np-pullquote {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-style: italic;
+  font-weight: 400;
+  color: #1A1008;
+  border-top: 2px solid #1A1008;
+  border-bottom: 1px solid rgba(42, 31, 20, 0.2);
+  padding: 12px 0;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.np-pullquote cite {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(42, 31, 20, 0.45);
+  margin-top: 8px;
+}
+
+/* ── Footer ──────────────────────────────────────────────── */
+.np-footer {
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.55rem;
+  color: rgba(42, 31, 20, 0.35);
+  letter-spacing: 0.08em;
+  line-height: 2;
+  margin-top: 8px;
+}
+
+/* ── Mobile ──────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .np-body {
+    grid-template-columns: 1fr;
+  }
+
+  .np-col-side {
+    border-left: none;
+    border-top: 1px solid rgba(42, 31, 20, 0.15);
+    padding-left: 0;
+    padding-top: 20px;
+  }
+
+  .np-photo-frame {
+    aspect-ratio: 4/3;
+  }
+
+  .np-masthead-bottom {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+  }
+
+  .np-masthead-top {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+  }
+}

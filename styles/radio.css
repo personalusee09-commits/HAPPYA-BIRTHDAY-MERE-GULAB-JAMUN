@@ -1,0 +1,311 @@
+/* ============================================================
+   RADIO.CSS — Vintage radio, tune to 25.6
+============================================================ */
+
+#radio {
+  background: var(--off-white);
+  padding: var(--section-pad) var(--gutter);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.radio-header {
+  margin-bottom: clamp(40px, 7vw, 70px);
+  opacity: 0; /* GSAP */
+}
+
+/* Radio body */
+.radio-body {
+  width: min(90vw, 380px);
+  background: var(--white);
+  border-radius: 18px;
+  padding: clamp(28px, 5vw, 44px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+  border: 1px solid var(--grey-light);
+  opacity: 0; /* GSAP */
+}
+
+/* Display screen */
+.radio-screen {
+  background: var(--soft-black);
+  border-radius: 10px;
+  padding: 24px 16px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.radio-frequency {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  transition: color 0.3s ease;
+}
+
+.radio-frequency.tuned {
+  color: #8FD9A8;
+}
+
+.radio-status {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--grey-mid);
+  margin-top: 8px;
+}
+
+/* Static visualization bars */
+.radio-static {
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+  margin-top: 16px;
+  height: 20px;
+  align-items: center;
+}
+
+.static-bar {
+  width: 3px;
+  background: var(--accent);
+  opacity: 0.4;
+  border-radius: 1px;
+  transition: height 0.1s ease;
+}
+
+/* Tuning input */
+.radio-tuner {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tuner-input {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 300;
+  text-align: center;
+  width: 110px;
+  padding: 10px 14px;
+  border: 1px solid var(--grey-light);
+  border-radius: 8px;
+  background: var(--off-white);
+  color: var(--soft-black);
+  letter-spacing: 0.1em;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.tuner-input:focus {
+  border-color: var(--accent);
+}
+
+.tuner-submit {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: 1px solid var(--soft-black);
+  background: var(--soft-black);
+  color: var(--white);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tuner-submit:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Power button */
+.radio-power {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--grey-light);
+  background: var(--off-white);
+  color: var(--grey-mid);
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.radio-power.on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* Hint text */
+.radio-hint {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: var(--grey-dark);
+  margin-top: 28px;
+  opacity: 0; /* GSAP */
+}
+
+.radio-hint span {
+  color: var(--accent);
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Voice message reveal area */
+.radio-message {
+  margin-top: 24px;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.2vw, 1.3rem);
+  font-style: italic;
+  color: var(--soft-black);
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.8s ease;
+}
+
+.radio-message.visible {
+  opacity: 1;
+  max-height: 400px;
+}
+
+/* Hidden audio player */
+.radio-audio-player {
+  margin-top: 16px;
+  width: 100%;
+}
+
+/* Shake animation for wrong frequency */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+.shake {
+  animation: shake 0.4s ease;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 480px) {
+  .radio-tuner {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .tuner-input {
+    width: 100%;
+  }
+
+  .tuner-submit {
+    width: 100%;
+  }
+}
+
+/* ============================================================
+   MULTI-STATION — station dots + message label
+============================================================ */
+
+/* 4 dots at bottom of radio — one per station */
+#stationDots {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--grey-light);
+}
+
+.station-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--grey-light);
+  transition: all 0.6s ease;
+  position: relative;
+}
+
+/* Lights up when station is discovered */
+.station-dot.heard {
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(200, 168, 130, 0.6);
+}
+
+/* First dot (25.6 — main) always slightly visible as a hint */
+.station-dot:first-child {
+  background: rgba(200, 168, 130, 0.35);
+}
+
+/* Station label inside message area */
+#radioMessageLabel {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* Frequency color transition */
+.radio-frequency {
+  transition: color 0.5s ease;
+}
+
+/* ============================================================
+   HIDDEN STATION HINTS — blended into other sections
+   These are injected via CSS content so they're subtle
+============================================================ */
+
+/* Hint in memories section — near timeline */
+.memory-item:first-child .memory-year::after {
+  content: ' · 14.4';
+  color: rgba(200, 168, 130, 0.2);
+  font-size: 0.55em;
+  letter-spacing: 0.05em;
+  font-style: normal;
+}
+
+/* Hint in letter section — after signature */
+.letter-sign::after {
+  content: ' · 07.2';
+  color: rgba(200, 168, 130, 0.18);
+  font-size: 0.6em;
+  letter-spacing: 0.05em;
+}
+
+/* Hint in distance/riddle section */
+.riddle-text::after {
+  content: ' · 11.1';
+  color: rgba(200, 168, 130, 0.18);
+  font-size: 0.75em;
+  letter-spacing: 0.05em;
+}
+
+/* On hover they become slightly more visible — just enough */
+.memory-item:first-child .memory-year:hover::after,
+.letter-sign:hover::after,
+.riddle-text:hover::after {
+  color: rgba(200, 168, 130, 0.55);
+  transition: color 0.4s ease;
+}

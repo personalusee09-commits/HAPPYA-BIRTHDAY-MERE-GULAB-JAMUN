@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ✏️ EDIT: Change the tab title -->
+  <title>For You — 25</title>
+
+  <!-- Fonts: Cormorant (editorial display) + Inter (clean body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- GSAP for animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Swiper for photo cards -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- Howler for audio -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/hero.css" />
+  <link rel="stylesheet" href="styles/letter.css" />
+  <link rel="stylesheet" href="styles/photos.css" />
+  <link rel="stylesheet" href="styles/reasons.css" />
+  <link rel="stylesheet" href="styles/memories.css" />
+  <link rel="stylesheet" href="styles/distance.css" />
+  <link rel="stylesheet" href="styles/quotes.css" />
+  <link rel="stylesheet" href="styles/secret.css" />
+  <link rel="stylesheet" href="styles/radio.css" />
+  <link rel="stylesheet" href="styles/playlist.css" />
+  <link rel="stylesheet" href="styles/cake.css" />
+  <link rel="stylesheet" href="styles/wish.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       MUSIC TOGGLE — fixed corner button
+  ============================================================ -->
+  <button class="music-toggle" id="musicToggle" aria-label="Toggle music">
+    <span class="music-icon">♪</span>
+  </button>
+
+  <!-- ============================================================
+       SECTION 1: HERO
+  ============================================================ -->
+  <section class="section" id="hero">
+    <canvas id="particleCanvas"></canvas>
+    <div class="hero-content">
+      <p class="hero-eyebrow" id="heroEyebrow">June 25</p>
+      <!-- ✏️ EDIT: Her name below -->
+      <h1 class="hero-name" id="heroName">Your Girl</h1>
+      <p class="hero-sub" id="heroSub">This one's for you.</p>
+      <div class="hero-scroll-hint">
+        <span>scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 2: THE LETTER
+  ============================================================ -->
+  <section class="section" id="letter">
+    <div class="letter-container">
+      <p class="letter-label">A letter</p>
+      <div class="letter-body" id="letterBody">
+        <!-- ✏️ EDIT: Your letter paragraphs below -->
+        <p>I don't always say the right things. Sometimes I go quiet when I should speak, and speak when I should listen. But if there's one thing I've never been confused about — it's you.</p>
+        <p>You're somewhere far away right now. A different sky, a different city. And yet somehow you're the first thing I think of when something funny happens, the person I want to call when things go wrong, the reason some songs hit different now.</p>
+        <p>Distance is just geography. What we have isn't.</p>
+        <!-- ✏️ EDIT: Sign your name below -->
+        <p class="letter-sign">— Your Name</p>
+      </div>
+    </div>
+    <!-- Cursor trail canvas -->
+    <canvas id="trailCanvas"></canvas>
+  </section>
+
+  <!-- ============================================================
+       SECTION 3: PHOTO CARDS
+  ============================================================ -->
+  <section class="section" id="photos">
+    <div class="photos-header">
+      <p class="section-label">memories</p>
+      <h2 class="section-title">Us, in frames.</h2>
+    </div>
+
+    <div class="swiper photoSwiper">
+      <div class="swiper-wrapper" id="photoCards">
+
+        <!-- ✏️ EDIT: Each card below. Replace src with your photo paths.
+             Put your photos in assets/photos/ folder
+             Format: assets/photos/photo1.jpg -->
+
+        <div class="swiper-slide">
+          <div class="photo-card">
+            <div class="photo-frame">
+              <!-- ✏️ EDIT: Replace with your photo -->
+              <div class="photo-placeholder">📷</div>
+              <!-- <img src="assets/photos/photo1.jpg" alt="memory" /> -->
+            </div>
+            <!-- ✏️ EDIT: Caption for photo 1 -->
+            <p class="photo-caption">This day. I still think about it.</p>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="photo-card">
+            <div class="photo-frame">
+              <div class="photo-placeholder">📷</div>
+              <!-- <img src="assets/photos/photo2.jpg" alt="memory" /> -->
+            </div>
+            <!-- ✏️ EDIT: Caption for photo 2 -->
+            <p class="photo-caption">You didn't know I saved this one.</p>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="photo-card">
+            <div class="photo-frame">
+              <div class="photo-placeholder">📷</div>
+              <!-- <img src="assets/photos/photo3.jpg" alt="memory" /> -->
+            </div>
+            <!-- ✏️ EDIT: Caption for photo 3 -->
+            <p class="photo-caption">My favourite version of you.</p>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="photo-card">
+            <div class="photo-frame">
+              <div class="photo-placeholder">📷</div>
+              <!-- <img src="assets/photos/photo4.jpg" alt="memory" /> -->
+            </div>
+            <!-- ✏️ EDIT: Caption for photo 4 -->
+            <p class="photo-caption">I want a thousand more like this.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Navigation -->
+      <div class="swiper-button-prev photo-prev"></div>
+      <div class="swiper-button-next photo-next"></div>
+      <div class="swiper-pagination photo-pagination"></div>
+    </div>
+
+    <p class="swipe-hint">swipe to explore →</p>
+  </section>
+
+  <!-- ============================================================
+       SECTION 4: REASONS I LOVE YOU
+  ============================================================ -->
+  <section class="section" id="reasons">
+    <div class="reasons-container">
+      <div class="reasons-header">
+        <p class="section-label">why</p>
+        <h2 class="section-title">Reasons, <em>numbered</em>.</h2>
+      </div>
+      <div id="reasonsList">
+        <!-- Reasons injected from config.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 5: OUR MEMORIES — TIMELINE
+  ============================================================ -->
+  <section class="section" id="memories">
+    <div class="memories-container">
+      <div class="memories-header">
+        <p class="section-label">timeline</p>
+        <h2 class="section-title">How we <em>got here</em>.</h2>
+      </div>
+      <div class="timeline">
+        <div class="timeline-progress"></div>
+        <div id="timelineItems">
+          <!-- Memories injected from config.js -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 6: THE DISTANCE — Kerala → Haryana → Heart
+       (Also contains the Secret Heart trigger)
+  ============================================================ -->
+  <section class="section" id="distance">
+    <div class="distance-header">
+      <p class="section-label">the distance</p>
+      <h2 class="section-title">Kerala to Faridabad.</h2>
+    </div>
+
+    <div class="distance-km">
+      <span id="distanceKm">2,847</span>
+      <span>kilometres</span>
+    </div>
+    <p class="distance-fact" id="distanceFact"></p>
+
+    <div class="map-container">
+      <!-- Minimal India outline with animated path from Kerala to Haryana -->
+      <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+        <!-- Simplified India outline -->
+        <path class="india-outline" d="M150 20
+          C 180 25, 210 40, 225 70
+          C 240 100, 235 130, 245 150
+          C 255 170, 260 190, 250 210
+          C 245 230, 250 250, 240 270
+          C 230 290, 215 300, 200 320
+          C 190 340, 185 360, 170 375
+          C 160 385, 145 385, 135 375
+          C 120 360, 115 340, 105 320
+          C 95 300, 80 290, 70 270
+          C 60 250, 65 230, 55 210
+          C 45 190, 50 170, 60 150
+          C 70 130, 65 100, 80 70
+          C 95 40, 120 25, 150 20 Z" />
+
+        <!-- Animated dotted path: Faridabad (north) to Kerala (south) -->
+        <path class="distance-path" d="M 150 70 C 140 140, 160 220, 145 310" />
+
+        <!-- Haryana / Faridabad dot (north) -->
+        <circle class="city-dot start" cx="150" cy="70" r="4" />
+        <text class="city-label" id="cityEndLabel" x="160" y="65">Faridabad</text>
+
+        <!-- Kerala dot (south) -->
+        <circle class="city-dot" cx="145" cy="310" r="4" />
+        <text class="city-label" id="cityStartLabel" x="100" y="330">Kerala</text>
+
+        <!-- The Heart — secret trigger -->
+        <path class="distance-heart" d="M145 318
+          c -3 -4 -10 -4 -10 2
+          c 0 5 5 8 10 12
+          c 5 -4 10 -7 10 -12
+          c 0 -6 -7 -6 -10 -2 Z" />
+      </svg>
+    </div>
+
+    <p class="riddle-text" id="riddleText"></p>
+  </section>
+
+  <!-- ============================================================
+       SECTION 7: QUOTES — Full bleed cinematic
+  ============================================================ -->
+  <section class="section" id="quotes">
+    <div id="quotesContainer">
+      <!-- Quotes injected from config.js -->
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECRET HEART OVERLAY — fullscreen, hidden until triggered
+  ============================================================ -->
+  <div class="secret-overlay" id="secretOverlay">
+    <div class="secret-content">
+      <p class="secret-label">found it</p>
+      <p class="secret-message" id="secretMessage"></p>
+      <p class="secret-hint" id="secretHint">scroll to continue</p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SECTION 8: THE RADIO — Tune to 25.6
+  ============================================================ -->
+  <section class="section" id="radio">
+    <div class="radio-header">
+      <p class="section-label">tune in</p>
+      <h2 class="section-title">Frequency <em>25.6</em></h2>
+    </div>
+
+    <div class="radio-body">
+      <div class="radio-screen">
+        <p class="radio-frequency" id="radioFrequency">— — . —</p>
+        <p class="radio-status" id="radioStatus">off</p>
+        <div class="radio-static" id="staticBars"></div>
+      </div>
+
+      <div class="radio-tuner">
+        <input type="text" class="tuner-input" id="tunerInput" placeholder="00.0" maxlength="6" />
+        <button class="tuner-submit" id="tunerSubmit">Tune</button>
+      </div>
+
+      <button class="radio-power" id="radioPower" aria-label="Power">⏻</button>
+
+      <p class="radio-message" id="radioMessage">
+        <!-- ✏️ EDIT: Text shown when tuned correctly. The voice note also plays here. -->
+        Hey... if you're hearing this, you found me. Happy birthday.
+      </p>
+
+      <!-- ✏️ EDIT: Voice note plays via Howler from config.js VOICE_NOTE_FILE -->
+      <div class="radio-audio-player" id="radioAudioPlayer"></div>
+    </div>
+
+    <p class="radio-hint">Turn it on. Tune to <span id="radioHintNum">25.6</span>.</p>
+  </section>
+
+  <!-- ============================================================
+       SECTION 9: PLAYLIST
+  ============================================================ -->
+  <section class="section" id="playlist">
+    <div class="playlist-container">
+      <div class="playlist-header">
+        <p class="section-label">our playlist</p>
+        <h2 class="section-title">Songs that <em>sound like us</em>.</h2>
+      </div>
+      <div id="playlistTracks">
+        <!-- Tracks injected from config.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 10: THE CAKE — Blow, cut, fireworks
+  ============================================================ -->
+  <section class="section" id="cake">
+    <div class="cake-header">
+      <p class="section-label">make a wish</p>
+      <h2 class="section-title">Happy <em>Birthday</em>.</h2>
+    </div>
+
+    <div class="cake-stage">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- Plate -->
+        <ellipse cx="100" cy="175" rx="80" ry="8" fill="#E8E8E8" />
+
+        <!-- Cake bottom layer -->
+        <g class="cake-half left">
+          <path d="M20 110 L20 165 L100 165 L100 110 Z" fill="#F4E4D4" />
+          <path d="M20 110 L100 110 L100 95 L20 95 Z" fill="#FFFFFF" />
+        </g>
+        <g class="cake-half right">
+          <path d="M100 110 L100 165 L180 165 L180 110 Z" fill="#F4E4D4" />
+          <path d="M100 110 L180 110 L180 95 L100 95 Z" fill="#FFFFFF" />
+        </g>
+
+        <!-- Reveal text inside cake -->
+        <text class="cake-reveal-text" x="100" y="140" text-anchor="middle">
+          <tspan id="cakeRevealText">Her Name</tspan>
+        </text>
+
+        <!-- Candles -->
+        <g>
+          <!-- Candle 1 -->
+          <rect x="55" y="75" width="6" height="20" fill="#C8A882" />
+          <path class="flame" d="M58 75 C 55 70, 55 65, 58 62 C 61 65, 61 70, 58 75 Z" />
+          <path class="smoke" d="M58 60 Q 60 50, 56 40" />
+
+          <!-- Candle 2 -->
+          <rect x="97" y="70" width="6" height="25" fill="#C8A882" />
+          <path class="flame" d="M100 70 C 97 65, 97 60, 100 57 C 103 60, 103 65, 100 70 Z" />
+          <path class="smoke" d="M100 55 Q 102 45, 98 35" />
+
+          <!-- Candle 3 -->
+          <rect x="139" y="75" width="6" height="20" fill="#C8A882" />
+          <path class="flame" d="M142 75 C 139 70, 139 65, 142 62 C 145 65, 145 70, 142 75 Z" />
+          <path class="smoke" d="M142 60 Q 144 50, 140 40" />
+        </g>
+
+        <!-- Knife -->
+        <g class="knife">
+          <rect x="0" y="0" width="6" height="50" fill="#D0D0D0" transform="translate(120, 10)" />
+          <rect x="0" y="-8" width="10" height="14" rx="2" fill="#999999" transform="translate(118, 10)" />
+        </g>
+      </svg>
+    </div>
+
+    <div class="cake-actions">
+      <button class="cake-btn primary" id="blowBtn">Blow Candles</button>
+      <button class="cake-btn" id="cutBtn" disabled>Cut Cake</button>
+    </div>
+  </section>
+
+  <!-- Fireworks fullscreen overlay -->
+  <div class="fireworks-overlay" id="fireworksOverlay">
+    <canvas id="fireworksCanvas"></canvas>
+    <p class="fireworks-text" id="fireworksText"></p>
+  </div>
+
+  <!-- ============================================================
+       SECTION 11: THE WISH — Final screen with confetti
+  ============================================================ -->
+  <section class="section" id="wish">
+    <canvas id="confettiCanvas"></canvas>
+    <div class="wish-content">
+      <p class="wish-eyebrow">Happy Birthday</p>
+      <h2 class="wish-name" id="wishName">Her Name</h2>
+      <p class="wish-message" id="wishMessage"></p>
+      <p class="wish-sign" id="wishSign"></p>
+
+      <div class="wish-future" id="wishFuture">
+        <!-- Future dreams injected from config.js -->
+      </div>
+
+      <p class="wish-end">made with love · for you · always</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       END OF EXPERIENCE
+  ============================================================ -->
+
+  <!-- Scripts -->
+  <script src="sections/config.js"></script>
+  <script src="sections/hero.js"></script>
+  <script src="sections/letter.js"></script>
+  <script src="sections/photos.js"></script>
+  <script src="sections/reasons.js"></script>
+  <script src="sections/memories.js"></script>
+  <script src="sections/distance.js"></script>
+  <script src="sections/quotes.js"></script>
+  <script src="sections/radio.js"></script>
+  <script src="sections/playlist.js"></script>
+  <script src="sections/cake.js"></script>
+  <script src="sections/wish.js"></script>
+  <script src="sections/audio.js"></script>
+
+</body>
+</html>

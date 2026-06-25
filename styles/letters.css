@@ -1,0 +1,187 @@
+/* ============================================================
+   LETTERS.CSS — Unsent letter overlay
+   Paper texture. Ink feel. Crossed-out honesty.
+============================================================ */
+
+/* ── Overlay backdrop ───────────────────────────────────── */
+#lnsOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99998;
+  background: rgba(8, 7, 6, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 5vw, 60px);
+  cursor: pointer;
+  transition: background 1s ease;
+  overflow-y: auto;
+}
+
+#lnsOverlay.lns-visible {
+  background: rgba(8, 7, 6, 0.97);
+}
+
+#lnsOverlay.lns-closing {
+  background: rgba(8, 7, 6, 0) !important;
+  transition: background 0.8s ease !important;
+}
+
+/* ── Paper card ─────────────────────────────────────────── */
+.lns-paper {
+  position: relative;
+  max-width: 620px;
+  width: 100%;
+  background: #F5F0E8;
+  padding: clamp(32px, 6vw, 64px) clamp(28px, 6vw, 60px);
+  border-radius: 2px;
+
+  /* Paper texture via box shadow layering */
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.06),
+    0 4px 6px rgba(0,0,0,0.08),
+    0 20px 60px rgba(0,0,0,0.35),
+    0 60px 120px rgba(0,0,0,0.25);
+
+  /* Subtle paper grain */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+
+  /* Left ruled margin line */
+  border-left: 3px solid rgba(200, 168, 130, 0.25);
+
+  /* Animate in */
+  opacity: 0;
+  transform: translateY(18px) scale(0.98);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lns-paper.lns-paper-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Slight paper tilt — barely perceptible */
+.lns-paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    transparent,
+    transparent 27px,
+    rgba(180, 160, 130, 0.12) 27px,
+    rgba(180, 160, 130, 0.12) 28px
+  );
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+/* ── Label ──────────────────────────────────────────────── */
+.lns-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.52rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(200, 168, 130, 0.7);
+  margin: 0 0 32px 0;
+}
+
+/* ── Letter typography ──────────────────────────────────── */
+.lns-letter {
+  position: relative;
+}
+
+.lns-date {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: rgba(60, 45, 30, 0.45);
+  margin: 0 0 28px 0;
+  letter-spacing: 0.05em;
+}
+
+.lns-salutation {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-weight: 600;
+  color: #2A1F14;
+  margin: 0 0 20px 0;
+  letter-spacing: 0.01em;
+}
+
+.lns-body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  font-weight: 300;
+  line-height: 1.95;
+  color: #2A1F14;
+  margin: 0 0 32px 0;
+  letter-spacing: 0.015em;
+}
+
+.lns-closing {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(42, 31, 20, 0.7);
+  margin: 0;
+  line-height: 1.8;
+}
+
+/* ── Crossed-out text ───────────────────────────────────── */
+.lns-cross {
+  position: relative;
+  color: rgba(42, 31, 20, 0.45);
+  text-decoration: none;
+}
+
+.lns-cross::after {
+  content: '';
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  top: 50%;
+  height: 1.5px;
+  background: #2A1F14;
+  transform: translateY(-50%) rotate(-0.5deg);
+  opacity: 0.6;
+}
+
+/* ── Margin scribbles ───────────────────────────────────── */
+.lns-margin {
+  display: inline-block;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 0.72rem;
+  font-style: italic;
+  color: rgba(200, 168, 130, 0.75);
+  margin-left: 8px;
+  vertical-align: middle;
+  transform: rotate(-2deg);
+  display: inline-block;
+}
+
+/* ── Hint ───────────────────────────────────────────────── */
+.lns-hint {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.52rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(42, 31, 20, 0.3);
+  margin: 36px 0 0 0;
+  text-align: center;
+}
+
+/* ── Mobile ─────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .lns-paper {
+    padding: 28px 24px;
+    margin: 16px;
+  }
+
+  .lns-body {
+    line-height: 1.85;
+  }
+}

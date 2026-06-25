@@ -1,0 +1,114 @@
+/* ============================================================
+   REELS.CSS — Vertical swipeable video feed
+============================================================ */
+
+#reels {
+  background: var(--soft-black);
+  padding: var(--section-pad) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.reels-header {
+  text-align: center;
+  padding: 0 var(--gutter);
+  margin-bottom: clamp(32px, 6vw, 48px);
+  opacity: 0; /* GSAP reveal */
+}
+
+#reels .section-title {
+  color: var(--white);
+}
+
+/* ── Phone-sized 9:16 container ── */
+.reels-container {
+  position: relative;
+  width: min(90vw, 360px);
+  height: min(160vw, 640px); /* Keeps 9:16 ratio on mobile */
+  max-height: 75vh;
+  margin: 0 auto;
+  border-radius: 20px;
+  background: var(--black);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.08);
+  overflow: hidden;
+  opacity: 0; /* GSAP reveal */
+  transform: translateY(20px);
+}
+
+/* ── Swiper overrides ── */
+.reelsSwiper {
+  width: 100%;
+  height: 100%;
+}
+
+.reel-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.reel-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Caption Overlay ── */
+.reel-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 80px 24px 24px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.reel-caption {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 3vw, 1.3rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+/* ── Mute Button ── */
+.reels-mute-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.reels-mute-btn:hover {
+  background: rgba(0, 0, 0, 0.6);
+  transform: scale(1.05);
+}
+
+#reels .swipe-hint {
+  color: rgba(255,255,255,0.4);
+  margin-top: 24px;
+}

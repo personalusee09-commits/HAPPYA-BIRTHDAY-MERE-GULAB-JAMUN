@@ -1,0 +1,218 @@
+/* ============================================================
+   CAKE.CSS — Blow candles, cut cake, fireworks explosion
+============================================================ */
+
+#cake {
+  background: var(--off-white);
+  padding: var(--section-pad) var(--gutter);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cake-header {
+  margin-bottom: clamp(40px, 7vw, 70px);
+  opacity: 0; /* GSAP */
+}
+
+/* Cake SVG container */
+.cake-stage {
+  position: relative;
+  width: min(80vw, 320px);
+  margin: 0 auto;
+  opacity: 0; /* GSAP */
+}
+
+.cake-stage svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Candle flames */
+.flame {
+  fill: var(--accent);
+  transform-origin: bottom center;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.flame.blown {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+@keyframes flicker {
+  0%, 100% { transform: scaleY(1) scaleX(1); }
+  25% { transform: scaleY(1.1) scaleX(0.95); }
+  50% { transform: scaleY(0.95) scaleX(1.05); }
+  75% { transform: scaleY(1.05) scaleX(0.98); }
+}
+
+.flame:not(.blown) {
+  animation: flicker 0.6s ease-in-out infinite;
+}
+
+/* Smoke wisp */
+.smoke {
+  fill: none;
+  stroke: var(--grey-mid);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  opacity: 0;
+}
+
+.smoke.active {
+  animation: smoke-rise 1.6s ease-out forwards;
+}
+
+@keyframes smoke-rise {
+  0% { opacity: 0.6; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-24px) scale(1.4); }
+}
+
+/* Cake body halves - for cutting animation */
+.cake-half {
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cake-half.left {
+  transform-origin: bottom left;
+}
+
+.cake-half.right {
+  transform-origin: bottom right;
+}
+
+.cake-stage.cut .cake-half.left {
+  transform: translateX(-14px) rotate(-2deg);
+}
+
+.cake-stage.cut .cake-half.right {
+  transform: translateX(14px) rotate(2deg);
+}
+
+/* Reveal text inside cake */
+.cake-reveal-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  fill: var(--accent);
+  opacity: 0;
+  transition: opacity 0.8s ease 0.6s;
+}
+
+.cake-stage.cut .cake-reveal-text {
+  opacity: 1;
+}
+
+/* Knife */
+.knife {
+  position: absolute;
+  top: -40px;
+  right: 10%;
+  width: 60px;
+  opacity: 0.85;
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(0) rotate(0deg);
+}
+
+.cake-stage.cut .knife {
+  transform: translateY(160px) rotate(-15deg);
+}
+
+/* Buttons */
+.cake-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: clamp(32px, 6vw, 56px);
+  opacity: 0; /* GSAP */
+}
+
+.cake-btn {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border-radius: 100px;
+  border: 1px solid var(--soft-black);
+  background: transparent;
+  color: var(--soft-black);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cake-btn:hover:not(:disabled) {
+  background: var(--soft-black);
+  color: var(--white);
+}
+
+.cake-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.cake-btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+}
+
+.cake-btn.primary:hover:not(:disabled) {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+/* ============================================================
+   FIREWORKS OVERLAY
+============================================================ */
+.fireworks-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--black);
+  z-index: 10001;
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fireworks-overlay canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.fireworks-text {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 10vw, 6rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--white);
+  text-align: center;
+  opacity: 0;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 480px) {
+  .cake-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 240px;
+  }
+
+  .cake-btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,201 @@
+/* ============================================================
+   HEARTS.CSS — Hidden heart pieces collection game
+============================================================ */
+
+/* ── Floating heart pieces ─────────────────────────────────── */
+.heart-piece {
+  position: absolute;
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  cursor: pointer;
+  z-index: 50;
+  opacity: 0.35;
+  filter: drop-shadow(0 0 6px rgba(200, 168, 130, 0.4));
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  animation: heart-piece-float 3.5s ease-in-out infinite;
+  user-select: none;
+  line-height: 1;
+}
+
+.heart-piece:hover {
+  opacity: 0.9;
+  transform: scale(1.25);
+}
+
+.heart-piece.collected {
+  pointer-events: none;
+}
+
+@keyframes heart-piece-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ── Flying heart animation toward tracker ─────────────────── */
+.heart-flyer {
+  position: fixed;
+  font-size: 1.3rem;
+  z-index: 100000;
+  pointer-events: none;
+  transition: left 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+              top 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.85s ease,
+              opacity 0.85s ease;
+}
+
+/* ── Tracker icon (fixed corner) ─────────────────────────────── */
+.heart-tracker {
+  position: fixed;
+  top: 28px;
+  right: 84px;
+  z-index: 9999;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid var(--grey-light);
+  border-radius: 100px;
+  height: 44px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+  user-select: none;
+}
+
+.heart-tracker-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.heart-tracker-count {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--grey-dark);
+}
+
+.heart-tracker.pulse {
+  transform: scale(1.12);
+  box-shadow: 0 4px 24px var(--accent-glow);
+}
+
+.heart-tracker.complete {
+  border-color: var(--accent);
+}
+
+.heart-tracker.complete .heart-tracker-count {
+  color: var(--accent);
+}
+
+/* ── Fullscreen reveal overlay ──────────────────────────────── */
+.hearts-reveal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--black);
+  z-index: 10002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gutter);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease;
+  cursor: pointer;
+}
+
+.hearts-reveal-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hearts-reveal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 640px;
+}
+
+/* Heart shape SVG, drawn via stroke animation */
+.hearts-shape-svg {
+  width: min(60vw, 220px);
+  height: auto;
+  margin-bottom: 32px;
+}
+
+.hearts-shape-path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 620;
+  stroke-dashoffset: 620;
+  animation: hearts-draw 1.6s ease forwards 0.3s,
+             hearts-fill 0.8s ease forwards 1.7s;
+}
+
+@keyframes hearts-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes hearts-fill {
+  to { fill: var(--accent); fill-opacity: 0.85; }
+}
+
+.hearts-reveal-label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.7;
+  margin-bottom: 24px;
+}
+
+.hearts-reveal-message {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 3.6vw, 2.2rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--white);
+}
+
+.hearts-reveal-message .hearts-word {
+  display: inline-block;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.hearts-reveal-hint {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--grey-mid);
+  margin-top: 40px;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 768px) {
+  .heart-tracker {
+    top: 16px;
+    right: 64px;
+    height: 38px;
+    padding: 0 12px;
+  }
+
+  .heart-piece {
+    font-size: 1.3rem;
+  }
+}

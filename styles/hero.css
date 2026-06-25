@@ -1,0 +1,122 @@
+/* ============================================================
+   HERO.CSS — Full screen cinematic opening
+============================================================ */
+
+#hero {
+  background: var(--white);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+/* Particle canvas behind everything */
+#particleCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* Small date label above name */
+.hero-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+  opacity: 0; /* GSAP animates in */
+}
+
+/* THE NAME — the whole page in one word */
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 18vw, 16rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+  color: var(--soft-black);
+  opacity: 0; /* GSAP animates in */
+  position: relative;
+}
+
+/* Italic style accent on name */
+.hero-name em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+/* Subtitle below name */
+.hero-sub {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--grey-dark);
+  margin-top: 28px;
+  opacity: 0; /* GSAP animates in */
+  letter-spacing: 0.02em;
+}
+
+/* Scroll hint at bottom */
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0; /* GSAP animates in */
+}
+
+.hero-scroll-hint span {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--grey-mid);
+}
+
+.scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--grey-mid), transparent);
+  animation: scroll-drop 2s ease-in-out infinite;
+}
+
+@keyframes scroll-drop {
+  0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
+  50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 768px) {
+  .hero-name {
+    font-size: clamp(4rem, 22vw, 7rem);
+  }
+
+  .hero-scroll-hint {
+    bottom: 32px;
+  }
+}

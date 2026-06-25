@@ -1,0 +1,101 @@
+/* ============================================================
+   LETTER.CSS — Editorial love letter section
+============================================================ */
+
+#letter {
+  background: var(--white);
+  padding: var(--section-pad) var(--gutter);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Trail canvas - cursor leaves soft mark here */
+#trailCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.letter-container {
+  position: relative;
+  z-index: 1;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: clamp(48px, 8vw, 100px) 0;
+}
+
+/* Small label */
+.letter-label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 48px;
+  opacity: 0; /* GSAP */
+}
+
+/* Letter paragraphs */
+.letter-body p {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.8vw, 1.75rem);
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--soft-black);
+  margin-bottom: 2em;
+  opacity: 0; /* GSAP — each paragraph fades in separately */
+  letter-spacing: 0.01em;
+}
+
+/* First letter drop cap — editorial touch */
+.letter-body p:first-child::first-letter {
+  font-family: var(--font-display);
+  font-size: 4.5em;
+  font-weight: 600;
+  float: left;
+  line-height: 0.75;
+  margin-right: 8px;
+  margin-top: 8px;
+  color: var(--accent);
+}
+
+/* Signature */
+.letter-sign {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.25rem) !important;
+  font-style: italic !important;
+  color: var(--grey-dark) !important;
+  margin-top: 3em !important;
+  padding-top: 2em;
+  border-top: 1px solid var(--grey-light);
+}
+
+/* Thin vertical rule on left — magazine detail */
+.letter-container::before {
+  content: '';
+  position: absolute;
+  left: -32px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+  opacity: 0.4;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 768px) {
+  .letter-container::before {
+    display: none;
+  }
+
+  .letter-body p:first-child::first-letter {
+    font-size: 3.5em;
+  }
+}

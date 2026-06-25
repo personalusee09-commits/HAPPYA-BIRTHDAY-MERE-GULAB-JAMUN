@@ -1,0 +1,234 @@
+/* ============================================================
+   AANKHEIN.CSS — Type "aankhein" → soft dreamy warm light
+   Bokeh bloom · Gentle glow · Whispered message · Video
+============================================================ */
+
+/* ── Base overlay ───────────────────────────────────────── */
+#aankheinOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: none;
+  opacity: 0;
+  background: #0a0603;
+  transition: opacity 1.6s ease;
+}
+
+#aankheinOverlay.aa-visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── Warm gradient bloom — center light source ──────────── */
+.aa-bloom {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 52%,
+      rgba(200, 160, 100, 0.18) 0%,
+      rgba(180, 130, 80,  0.10) 40%,
+      transparent 75%),
+    radial-gradient(ellipse 100% 80% at 50% 60%,
+      rgba(120, 80, 40, 0.12) 0%,
+      transparent 70%);
+  transition: opacity 3s ease;
+}
+
+#aankheinOverlay.aa-bloom-in .aa-bloom {
+  opacity: 1;
+}
+
+/* ── Bokeh canvas ───────────────────────────────────────── */
+#aankheinCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── Dreamy message ─────────────────────────────────────── */
+.aa-message {
+  position: absolute;
+  left: 50%;
+  top: 36%;
+  transform: translateX(-50%);
+  z-index: 4;
+  text-align: center;
+  width: 90%;
+  max-width: 520px;
+  opacity: 0;
+  transition: opacity 2s ease;
+  pointer-events: none;
+}
+
+.aa-message.aa-message-in {
+  opacity: 1;
+}
+
+.aa-message-small {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(200, 168, 130, 0.5);
+  margin-bottom: 18px;
+}
+
+.aa-message-main {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.3rem, 3.8vw, 2.1rem);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255, 240, 210, 0.88);
+  letter-spacing: 0.03em;
+  line-height: 1.7;
+}
+
+.aa-message-sub {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(0.9rem, 2.2vw, 1.2rem);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(200, 168, 130, 0.55);
+  letter-spacing: 0.05em;
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+/* ── Video wrapper ───────────────────────────────────────── */
+.aa-video-wrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.94);
+  z-index: 5;
+  width: min(86vw, 800px);
+  opacity: 0;
+  transition: opacity 1.6s ease, transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.aa-video-wrap.aa-video-in {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+#aankheinVideo {
+  width: 100%;
+  max-height: 70vh;
+  display: block;
+  border-radius: 20px;
+  background: #000;
+  /* Dreamy soft-focus vignette feel */
+  box-shadow:
+    0 0 0 1px rgba(200, 168, 130, 0.07),
+    0 0 80px rgba(200, 140, 80, 0.12),
+    0 30px 90px rgba(0, 0, 0, 0.85);
+  filter: brightness(0.97) saturate(0.95);
+}
+
+/* Warm vignette overlay on video */
+.aa-video-vignette {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    rgba(10, 6, 3, 0.35) 100%
+  );
+  pointer-events: none;
+}
+
+/* ── Tap to play (mobile) ───────────────────────────────── */
+.aa-play-btn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.28);
+  border-radius: 20px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.aa-play-btn.aa-play-visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.aa-play-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(200, 168, 130, 0.2);
+  border: 1px solid rgba(200, 168, 130, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: rgba(255, 240, 210, 0.85);
+  padding-left: 3px;
+  backdrop-filter: blur(6px);
+  transition: transform 0.3s ease;
+}
+
+.aa-play-btn:hover .aa-play-icon {
+  transform: scale(1.1);
+}
+
+/* ── Exit button ─────────────────────────────────────────── */
+.aa-exit {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  z-index: 10;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(200, 168, 130, 0.22);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  opacity: 0;
+  transition: opacity 0.8s ease, color 0.3s ease;
+  pointer-events: none;
+}
+
+.aa-exit.aa-exit-in {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.aa-exit:hover {
+  color: rgba(200, 168, 130, 0.65);
+}
+
+/* ── Fade out ────────────────────────────────────────────── */
+#aankheinOverlay.aa-fade-out {
+  opacity: 0 !important;
+  transition: opacity 1.8s ease !important;
+  pointer-events: none !important;
+}
+
+/* ── Mobile ─────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  #aankheinVideo {
+    border-radius: 12px;
+    max-height: 62vh;
+  }
+
+  .aa-video-wrap     { width: 94vw; }
+  .aa-video-vignette { border-radius: 12px; }
+  .aa-play-btn       { border-radius: 12px; }
+}

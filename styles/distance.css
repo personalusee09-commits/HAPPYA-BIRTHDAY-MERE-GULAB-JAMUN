@@ -1,0 +1,139 @@
+/* ============================================================
+   DISTANCE.CSS — Kerala to Haryana, animated line → heart
+============================================================ */
+
+#distance {
+  background: var(--white);
+  padding: var(--section-pad) var(--gutter);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.distance-header {
+  margin-bottom: clamp(32px, 6vw, 60px);
+  opacity: 0; /* GSAP */
+}
+
+.distance-km {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 9vw, 6rem);
+  font-weight: 300;
+  color: var(--soft-black);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.distance-km span {
+  font-size: 0.35em;
+  font-weight: 400;
+  color: var(--grey-mid);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+  margin-left: 8px;
+}
+
+.distance-fact {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: var(--grey-dark);
+  margin-top: 16px;
+}
+
+/* Map container */
+.map-container {
+  position: relative;
+  width: min(90vw, 480px);
+  margin: 0 auto;
+}
+
+.map-container svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* The animated path */
+.distance-path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 6 8;
+}
+
+/* Outline of India */
+.india-outline {
+  fill: none;
+  stroke: var(--grey-light);
+  stroke-width: 1.5;
+}
+
+/* City dots */
+.city-dot {
+  fill: var(--soft-black);
+}
+
+.city-dot.start {
+  fill: var(--accent);
+}
+
+/* City labels */
+.city-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  fill: var(--grey-dark);
+}
+
+/* The heart at the end of the line */
+.distance-heart {
+  fill: var(--white);
+  stroke: var(--accent);
+  stroke-width: 2;
+  transform-origin: center;
+  transform-box: fill-box;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+}
+
+.distance-heart.found {
+  fill: var(--accent);
+  animation: heart-beat 1.4s ease-in-out infinite;
+}
+
+.distance-heart:hover {
+  filter: drop-shadow(0 0 8px var(--accent-glow));
+}
+
+@keyframes heart-beat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* The riddle — small, almost a whisper */
+.riddle-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+  color: var(--grey-mid);
+  margin-top: clamp(32px, 6vw, 56px);
+  opacity: 0; /* GSAP - fades in subtly, later than everything else */
+  max-width: 360px;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 768px) {
+  .map-container {
+    width: 92vw;
+  }
+}

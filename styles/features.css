@@ -1,0 +1,319 @@
+/* ============================================================
+   FEATURES.CSS — Styles for new features:
+   Shooting Stars, Weather Particles, Keyboard Code, India Map
+============================================================ */
+
+/* ============================================================
+   WEATHER BADGE
+============================================================ */
+#weatherBadge {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 9998;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(200, 168, 130, 0.35);
+  border-radius: 100px;
+  padding: 8px 18px;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--soft-black);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  cursor: default;
+  pointer-events: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* ============================================================
+   WEATHER CANVAS
+============================================================ */
+#weatherCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0.65;
+}
+
+/* ============================================================
+   KEYBOARD CODE — Heart burst elements
+============================================================ */
+.key-heart-burst {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  user-select: none;
+  transform: translate(-50%, -50%);
+}
+
+/* Golden ripple from center */
+.golden-ripple {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border: 2px solid rgba(200, 168, 130, 0.8);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: none;
+  z-index: 99998;
+}
+
+/* Keyboard code toast */
+#keyCodeToast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.88);
+  z-index: 100000;
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(200, 168, 130, 0.4);
+  border-radius: 20px;
+  padding: 36px 52px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  max-width: min(90vw, 480px);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.4);
+}
+
+#keyCodeToast.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+#keyCodeToast .toast-main {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+#keyCodeToast .toast-sub {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Keyboard hint — barely visible whisper */
+#keyHint {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  font-family: var(--font-body);
+  font-size: 0.55rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(153, 153, 153, 0.35);
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 0;
+  transition: opacity 2s ease;
+  user-select: none;
+}
+
+/* ============================================================
+   INDIA MAP — real GeoJSON-based SVG
+============================================================ */
+#indiaMapSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* India filled silhouette */
+#indiaMapSvg .india-fill {
+  fill: rgba(200, 168, 130, 0.07);
+}
+
+/* India border */
+#indiaMapSvg .india-outline {
+  fill: none;
+  stroke: var(--grey-light);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+
+/* Animated dotted route */
+#indiaMapSvg .distance-path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 6 8;
+}
+
+/* Glow behind route */
+#indiaMapSvg .route-glow {
+  fill: none;
+  stroke: rgba(200, 168, 130, 0.2);
+  stroke-width: 7;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+/* City dots */
+#indiaMapSvg .city-dot {
+  fill: var(--soft-black);
+}
+
+#indiaMapSvg .kerala-dot {
+  fill: var(--accent);
+}
+
+#indiaMapSvg .faridabad-dot {
+  fill: var(--soft-black);
+}
+
+/* Pulse rings */
+#indiaMapSvg .city-dot-pulse {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  opacity: 0;
+  animation: ring-pulse 2.5s ease-out infinite;
+}
+
+#indiaMapSvg .faridabad-pulse {
+  stroke: var(--soft-black);
+  animation-delay: 0.8s;
+}
+
+@keyframes ring-pulse {
+  0%   { r: 5;  opacity: 0.6; }
+  100% { r: 14; opacity: 0; }
+}
+
+/* City labels */
+#indiaMapSvg .city-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  fill: var(--grey-dark);
+}
+
+#indiaMapSvg .city-sublabel {
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 400;
+  fill: var(--grey-mid);
+  letter-spacing: 0.05em;
+}
+
+/* Waypoint dots along route */
+#indiaMapSvg .waypoint-dot {
+  fill: rgba(200, 168, 130, 0.3);
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+/* Heart at midpoint */
+#indiaMapSvg .distance-heart {
+  fill: var(--white);
+  stroke: var(--accent);
+  stroke-width: 1.8;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+#indiaMapSvg .distance-heart.found {
+  fill: var(--accent);
+  animation: heart-beat 1.4s ease-in-out infinite;
+}
+
+#indiaMapSvg .distance-heart:hover {
+  filter: drop-shadow(0 0 10px rgba(200, 168, 130, 0.8));
+}
+
+/* Distance label on map */
+#indiaMapSvg .distance-label-map {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 10px;
+  fill: rgba(200, 168, 130, 0.7);
+  letter-spacing: 0.03em;
+}
+
+/* ============================================================
+   SHOOTING STARS — subtle idle glow on hero
+============================================================ */
+#hero.idle-hint::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 70% 20%, rgba(200, 168, 130, 0.04) 0%, transparent 60%);
+  pointer-events: none;
+  animation: star-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes star-glow {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 768px) {
+  #weatherBadge {
+    bottom: 16px;
+    left: 16px;
+    font-size: 0.55rem;
+    padding: 6px 14px;
+  }
+
+  #keyHint {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  #keyCodeToast {
+    padding: 28px 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  #indiaMapSvg .city-label {
+    font-size: 8px;
+  }
+}
+
+/* ============================================================
+   MAP CONTAINER — size override for real India map
+============================================================ */
+.map-container {
+  width: min(90vw, 420px) !important;
+  margin: 40px auto 0 !important;
+}
+
+@media (max-width: 480px) {
+  .map-container {
+    width: 95vw !important;
+  }
+}

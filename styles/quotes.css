@@ -1,0 +1,66 @@
+/* ============================================================
+   QUOTES.CSS — Full-bleed cinematic quote cards
+============================================================ */
+
+#quotes {
+  background: var(--soft-black);
+  padding: 0;
+  position: relative;
+}
+
+.quote-slide {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--gutter);
+  position: relative;
+}
+
+/* Each quote slide is stacked, scroll triggers fade between them */
+.quote-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 5vw, 3.2rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--white);
+  max-width: 800px;
+  opacity: 0; /* GSAP */
+  letter-spacing: 0.01em;
+}
+
+/* Quote mark decoration */
+.quote-mark {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  color: var(--accent);
+  opacity: 0.3;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+/* Index counter, small */
+.quote-index {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 768px) {
+  .quote-slide {
+    min-height: 70vh;
+  }
+}
